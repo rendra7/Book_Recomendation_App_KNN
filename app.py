@@ -6,10 +6,10 @@ import zipfile
 st.title("Book Recommendation Apps📚 ")
 
 # Loading the pre-trained models and datasets
-knn_model = pickle.load(open('model_kkn.pkl', 'rb'))
-final_data = pickle.load(open('data.pkl', 'rb'))
-with zipfile.ZipFile('book.pkl.zip', 'r') as zip_ref:
-    with zip_ref.open('book.pkl') as file:
+knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
+final_data = pickle.load(open('./data.pkl', 'rb'))
+with zipfile.ZipFile('./book.pkl.zip', 'r') as zip_ref:
+    with zip_ref.open('./book.pkl') as file:
         books_pivot = pickle.load(file)
 
 def fetch_poster(suggestion):
