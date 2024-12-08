@@ -1,6 +1,26 @@
-import pickle
 import streamlit as st
+import pickle
 import numpy as np
+
+# === Custom CSS untuk mengubah warna background menu ===
+st.markdown("""
+    <style>
+    /* Warna background sidebar */
+    .css-1aumxhk {
+        background-color: #4B6587 !important; /* Ubah ke warna yang Anda inginkan */
+    }
+
+    /* Warna pilihan radio button di sidebar */
+    .css-17eq0hr {
+        color: #F5F5F5 !important;  /* Warna teks */
+    }
+
+    /* Warna teks pada link navigasi */
+    .css-qbe2hs {
+        color: #FFFFFF !important;  /* Warna teks */
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # === Title of the app ===
 st.set_page_config(page_title="Book Recommendation App 📚", layout="wide")
@@ -48,7 +68,6 @@ def recommend_books(book_name):
 
     return book_list, poster_urls
 
-
 # === Page 1: Recommendation ===
 if menu == "Recommendation":
     st.header("📖 Discover Your Next Favorite Book!")
@@ -82,7 +101,6 @@ if menu == "Recommendation":
         with col8:
             st.image(posters[7], caption=recommended_books[7], use_column_width=True)
 
-
 # === Page 2: About ===
 elif menu == "About":
     st.header("📘 About This Application")
@@ -101,5 +119,5 @@ elif menu == "About":
     - Click the "Discover Your Next Read" button.
     - Enjoy your personalized book recommendations.
     
-    Created by **[Your Name]**. This project is open-source and can be accessed [here](https://github.com/rendra7/recomendation_book).
+    Created by **Rendra Dwi Prasetyo**. This project is open-source and can be accessed [here](https://github.com/rendra7/recomendation_book).
     """)
