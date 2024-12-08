@@ -3,13 +3,13 @@ import streamlit as st
 import numpy as np
 import zipfile
 
-st.title("Welcome to the 📚 Book Recommendation Hub 🎯")
+st.title("Book Recommendation Apps📚 ")
 
 # Loading the pre-trained models and datasets
-knn_model = pickle.load(open('artifacts/knn_model.pkl', 'rb'))
-final_data = pickle.load(open('artifacts/final_data.pkl', 'rb'))
-with zipfile.ZipFile('artifacts/book_pivot.pkl.zip', 'r') as zip_ref:
-    with zip_ref.open('book_pivot.pkl') as file:
+knn_model = pickle.load(open('model_kkn.pkl', 'rb'))
+final_data = pickle.load(open('data.pkl', 'rb'))
+with zipfile.ZipFile('book.pkl.zip', 'r') as zip_ref:
+    with zip_ref.open('book.pkl') as file:
         books_pivot = pickle.load(file)
 
 def fetch_poster(suggestion):
