@@ -2,43 +2,33 @@ import streamlit as st
 import pickle
 import numpy as np
 
+# === Set konfigurasi halaman ===
+st.set_page_config(page_title="Book Recommendation App 📚", layout="wide")
+
 # === Custom CSS untuk mengubah warna background menu ===
 st.markdown("""
     <style>
-    /* Warna background sidebar */
-    .css-1aumxhk {
-        background-color: #4B6587 !important; /* Ubah ke warna yang Anda inginkan */
+    .css-1aumxhk {  /* Untuk sidebar */
+        background-color: #4B6587 !important;
     }
-
-    /* Warna pilihan radio button di sidebar */
-    .css-17eq0hr {
-        color: #F5F5F5 !important;  /* Warna teks */
+    .css-17eq0hr {  /* Untuk teks judul */
+        color: #F5F5F5 !important;
     }
-
-    /* Warna teks pada link navigasi */
-    .css-qbe2hs {
-        color: #FFFFFF !important;  /* Warna teks */
+    .css-qbe2hs {  /* Untuk teks sidebar */
+        color: #FFFFFF !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# === Title of the app ===
-st.set_page_config(page_title="Book Recommendation App 📚", layout="wide")
+# === Title aplikasi ===
 st.title("📚 Book Recommendation App")
 
-# === Sidebar for Navigation ===
-menu = st.sidebar.radio(
-    "Navigate",
-    ("Recommendation", "About"),
-    index=0  # Default ke "Recommendation"
-)
-
-# === Load pre-trained models and datasets ===
+# === Load model dan data ===
 knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
 final_data = pickle.load(open('./data.pkl', 'rb'))
 books_pivot = pickle.load(open('./book.pkl', 'rb'))
 
-# === Function to fetch posters ===
+# === Fungsi untuk mengambil poster buku ===
 def fetch_poster(suggestion):
     book_titles = []
     poster_urls = []
@@ -53,11 +43,11 @@ def fetch_poster(suggestion):
 
     return poster_urls
 
-# === Function to recommend books ===
+# === Fungsi untuk merekomendasikan buku ===
 def recommend_books(book_name):
     book_list = []
     book_id = np.where(books_pivot.index == book_name)[0][0]
-    distances, suggestions = knn_model.kneighbors(books_pivot.iloc[book_id, :].values.reshape(1, -1), n_neighbors=9)
+    distances, suggestions = knn_model.kneighbors(books_pivot.iloc[book_id, :].values.reshape(1, -1), n_neighbors=9)  # 8 rekomendasi + 1 buku input
 
     poster_urls = fetch_poster(suggestions)
 
@@ -68,7 +58,9 @@ def recommend_books(book_name):
 
     return book_list, poster_urls
 
-# === Page 1: Recommendation ===
+# === Menu navigasi sidebar ===
+menu = st.sidebar.selectbox("Menu", ["Recommendation", "About"])
+
 if menu == "Recommendation":
     st.header("📖 Discover Your Next Favorite Book!")
     
@@ -77,10 +69,9 @@ if menu == "Recommendation":
         books_pivot.index
     )
 
-    if st.button('🔍 Discover Your Next Read'):
+    if st.button('Discover Your Next Read 📖'):
         recommended_books, posters = recommend_books(selected_book)
         
-        # Tampilkan 8 rekomendasi buku dalam 2 baris, masing-masing 4 kolom
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.image(posters[0], caption=recommended_books[0], use_column_width=True)
@@ -100,6 +91,7 @@ if menu == "Recommendation":
             st.image(posters[6], caption=recommended_books[6], use_column_width=True)
         with col8:
             st.image(posters[7], caption=recommended_books[7], use_column_width=True)
+
 
 # === Page 2: About ===
 elif menu == "About":
