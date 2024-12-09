@@ -14,7 +14,7 @@ menu = st.sidebar.radio(
 )
 
 # === Load pre-trained models and datasets ===
-knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
+knn_model = pickle.load(open('./model_knn.pkl', 'rb'))
 final_data = pickle.load(open('./data.pkl', 'rb'))
 books_pivot = pickle.load(open('./book.pkl', 'rb'))
 
