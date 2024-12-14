@@ -15,38 +15,31 @@ menu = st.sidebar.radio(
 )
 
 # === Fuction to download file from my Huggingface repository model ===
+# === Fuction to download file from Hugging Face ===
 @st.cache_data
-def download_file_from_huggingface(url, filename):
-    """Fungsi untuk mengunduh file dari Hugging Face dan menyimpannya secara lokal."""
+def download_model(url):
+    """Fungsi untuk mengunduh model dari URL Hugging Face dan menyimpannya secara lokal."""
     response = requests.get(url)
     if response.status_code == 200:
-        with open(filename, 'wb') as file:
+        with open('book.pkl', 'wb') as file:
             file.write(response.content)
-        return filename
+        return 'book.pkl'
     else:
-        st.error(f"Gagal mengunduh {filename}. Status kode: {response.status_code}")
+        st.error(f"Gagal mengunduh model. Status kode: {response.status_code}")
         return None
 
-# URL Hugging Face untuk books_pivot dan knn_model
+# URL Hugging Face untuk books_pivot
 url_books_pivot = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/book.pkl'
-url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/blob/main/model_knn.pkl'
 
-# Unduh books_pivot dan model_kkn dari Hugging Face
-books_pivot_path = download_file_from_huggingface(url_books_pivot, 'book.pkl')
-#knn_model_path = download_file_from_huggingface(url_knn_model, 'model_knn.pkl')
+# Unduh books_pivot dari Hugging Face
+books_pivot_path = download_model(url_books_pivot)
 
-# === Load books_pivot and knn_model ===
+# === Muat model dan dataset setelah diunduh ===
 if books_pivot_path:
     with open(books_pivot_path, 'rb') as file:
         books_pivot = pickle.load(file)
 else:
     st.error("Gagal memuat books_pivot")
-
-#if knn_model_path:
-    #with open(knn_model_path, 'rb') as file:
-        #knn_model = pickle.load(file)
-#else:
-    #st.error("Gagal memuat model_knn")
 
 # === Load pre-trained models and datasets ===
 
