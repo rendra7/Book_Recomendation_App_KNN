@@ -44,7 +44,7 @@ else:
 # === Load pre-trained models and datasets ===
 
 final_data = pickle.load(open('./data.pkl', 'rb'))
-final_data = pickle.load(open('./model_knn.pkl', 'rb'))
+knn_model = pickle.load(open('./model_knn.pkl', 'rb'))
 
 
 # === Function to fetch posters ===
