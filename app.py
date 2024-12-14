@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import numpy as np
+import requests
 
 # === Title of the app ===
 st.set_page_config(page_title="Book Recommendation App 📚", layout="wide")
@@ -12,6 +13,25 @@ menu = st.sidebar.radio(
     ("Recommendation", "About"),
     index=0  # Default ke "Recommendation"
 )
+
+# === Fuction to download file from my Huggingface repository model ===
+@st.cache_data
+def download_file(url, filename):
+    """."""
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(filename, 'wb') as file:
+            file.write(response.content)
+        return filename
+    else:
+        st.error(f"Gagal mengunduh {filename}. Status kode: {response.status_code}")
+        return None
+
+# URL Hugging Face for books_pivot
+url_books_pivot = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/book.pkl'
+
+# dwonloads books_pivot from Hugging Face
+books_pivot_path = download_file(url_books_pivot, 'book.pkl')
 
 # === Load pre-trained models and datasets ===
 knn_model = pickle.load(open('./model_knn.pkl', 'rb'))
