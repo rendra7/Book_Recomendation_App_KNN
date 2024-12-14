@@ -29,12 +29,14 @@ def download_file(url, filename):
 
 # URL Hugging Face for books_pivot
 url_books_pivot = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/book.pkl'
+url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/blob/main/model_kkn.pkl'
 
 # dwonloads books_pivot from Hugging Face
 books_pivot_path = download_file(url_books_pivot, 'book.pkl')
+books_pivot_path = download_file(url_knn_model, 'model_kkn.pkl')
 
 # === Load pre-trained models and datasets ===
-knn_model = pickle.load(open('./model_knn.pkl', 'rb'))
+knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
 final_data = pickle.load(open('./data.pkl', 'rb'))
 books_pivot = pickle.load(open('./book.pkl', 'rb'))
 
