@@ -35,6 +35,16 @@ url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/
 books_pivot_path = download_file(url_books_pivot, 'book.pkl')
 knn_model_path = download_file(url_knn_model, 'model_kkn.pkl')
 
+# ==  Checking    ==
+if os.path.exists(books_pivot_path):
+    with open(books_pivot_path, 'rb') as file:
+        try:
+            books_pivot = pickle.load(file)
+        except Exception as e:
+            print(f"Error loading pickle file: {e}")
+else:
+    print(f"File not found: {books_pivot_path}")
+
 # === Muat model dan dataset setelah diunduh ===
 if books_pivot_path:
     with open(books_pivot_path, 'rb') as file:
