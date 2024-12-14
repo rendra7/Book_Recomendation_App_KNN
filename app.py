@@ -93,23 +93,23 @@ if menu == "Recommendation":
         # Tampilkan 8 rekomendasi buku dalam 2 baris, masing-masing 4 kolom
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.image(posters[0], caption=recommended_books[0], use_container_width=True=True)
+            st.image(posters[0], caption=recommended_books[0], use_container_width=True)
         with col2:
-            st.image(posters[1], caption=recommended_books[1], use_container_width=True=True)
+            st.image(posters[1], caption=recommended_books[1], use_container_width=True)
         with col3:
-            st.image(posters[2], caption=recommended_books[2], use_container_width=True=True)
+            st.image(posters[2], caption=recommended_books[2], use_container_width=True)
         with col4:
-            st.image(posters[3], caption=recommended_books[3], use_container_width=True=True)
+            st.image(posters[3], caption=recommended_books[3], use_container_width=True)
 
         col5, col6, col7, col8 = st.columns(4)
         with col5:
-            st.image(posters[4], caption=recommended_books[4], use_container_width=True=True)
+            st.image(posters[4], caption=recommended_books[4], use_container_width=True)
         with col6:
-            st.image(posters[5], caption=recommended_books[5], use_container_width=True=True)
+            st.image(posters[5], caption=recommended_books[5], use_container_width=True)
         with col7:
-            st.image(posters[6], caption=recommended_books[6], use_container_width=True=True)
+            st.image(posters[6], caption=recommended_books[6], use_container_width=True)
         with col8:
-            st.image(posters[7], caption=recommended_books[7], use_container_width=True=True)
+            st.image(posters[7], caption=recommended_books[7], use_container_width=True)
 
 
 # === Page 2: About ===
