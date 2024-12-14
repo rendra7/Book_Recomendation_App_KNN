@@ -33,7 +33,7 @@ url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/blob/main/mod
 
 # Unduh books_pivot dan model_kkn dari Hugging Face
 books_pivot_path = download_file_from_huggingface(url_books_pivot, 'book.pkl')
-knn_model_path = download_file_from_huggingface(url_knn_model, 'model_knn.pkl')
+#knn_model_path = download_file_from_huggingface(url_knn_model, 'model_knn.pkl')
 
 # === Load books_pivot and knn_model ===
 if books_pivot_path:
@@ -42,15 +42,16 @@ if books_pivot_path:
 else:
     st.error("Gagal memuat books_pivot")
 
-if knn_model_path:
-    with open(knn_model_path, 'rb') as file:
-        knn_model = pickle.load(file)
-else:
-    st.error("Gagal memuat model_knn")
+#if knn_model_path:
+    #with open(knn_model_path, 'rb') as file:
+        #knn_model = pickle.load(file)
+#else:
+    #st.error("Gagal memuat model_knn")
 
 # === Load pre-trained models and datasets ===
 
 final_data = pickle.load(open('./data.pkl', 'rb'))
+final_data = pickle.load(open('./model_knn.pkl', 'rb'))
 
 
 # === Function to fetch posters ===
