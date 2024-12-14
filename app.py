@@ -29,11 +29,11 @@ def download_file_from_huggingface(url, filename):
 
 # URL Hugging Face untuk books_pivot dan knn_model
 url_books_pivot = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/book.pkl'
-url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/model_kkn.pkl'
+url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/blob/main/model_knn.pkl'
 
 # Unduh books_pivot dan model_kkn dari Hugging Face
 books_pivot_path = download_file_from_huggingface(url_books_pivot, 'book.pkl')
-knn_model_path = download_file_from_huggingface(url_knn_model, 'model_kkn.pkl')
+knn_model_path = download_file_from_huggingface(url_knn_model, 'model_knn.pkl')
 
 # === Load books_pivot and knn_model ===
 if books_pivot_path:
