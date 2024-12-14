@@ -17,7 +17,7 @@ menu = st.sidebar.radio(
 # === Fuction to download file from my Huggingface repository model ===
 @st.cache_data
 def download_file(url, filename):
-    """."""
+    """Fungsi untuk mengunduh file dari URL dan menyimpannya secara lokal."""
     response = requests.get(url)
     if response.status_code == 200:
         with open(filename, 'wb') as file:
@@ -27,18 +27,40 @@ def download_file(url, filename):
         st.error(f"Gagal mengunduh {filename}. Status kode: {response.status_code}")
         return None
 
-# URL Hugging Face for books_pivot
+# URL Hugging Face untuk books_pivot dan knn_model
 url_books_pivot = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/book.pkl'
-url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/blob/main/model_kkn.pkl'
+url_knn_model = 'https://huggingface.co/Rendra7/recomendation_book/resolve/main/model_kkn.pkl'
 
-# dwonloads books_pivot from Hugging Face
+# Unduh books_pivot dan model_kkn dari Hugging Face
 books_pivot_path = download_file(url_books_pivot, 'book.pkl')
-books_pivot_path = download_file(url_knn_model, 'model_kkn.pkl')
+knn_model_path = download_file(url_knn_model, 'model_kkn.pkl')
+
+# === Muat model dan dataset setelah diunduh ===
+if books_pivot_path:
+    with open(books_pivot_path, 'rb') as file:
+        books_pivot = pickle.load(file)
+else:
+    st.error("Gagal memuat books_pivot")
+
+if knn_model_path:
+    with open(knn_model_path, 'rb') as file:
+        knn_model = pickle.load(file)
+else:
+    st.error("Gagal memuat model_knn")
+
+# Coba memuat data lain jika perlu
+try:
+    with open('./data.pkl', 'rb') as file:
+        final_data = pickle.load(file)
+except FileNotFoundError as e:
+    st.error(f"File tidak ditemukan: {e}")
+except Exception as e:
+    st.error(f"Terjadi kesalahan saat memuat data: {e}")
 
 # === Load pre-trained models and datasets ===
-knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
+#knn_model = pickle.load(open('./model_kkn.pkl', 'rb'))
 final_data = pickle.load(open('./data.pkl', 'rb'))
-books_pivot = pickle.load(open('./book.pkl', 'rb'))
+#books_pivot = pickle.load(open('./book.pkl', 'rb'))
 
 # === Function to fetch posters ===
 def fetch_poster(suggestion):
