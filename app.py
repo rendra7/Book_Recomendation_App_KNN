@@ -130,5 +130,5 @@ elif menu == "About":
     - Click the "Discover Your Next Read" button.
     - Enjoy your personalized book recommendations.
     
-    Created by **Rendra Dwi Prasetyo**. This project is open-source and can be accessed [here](https://github.com/rendra7/recomendation_book).
+    Created by **Rendra Dwi Prasetyo and Tan, William sugiharto**. This project is open-source and can be accessed [here](https://github.com/rendra7/recomendation_book).
     """)
